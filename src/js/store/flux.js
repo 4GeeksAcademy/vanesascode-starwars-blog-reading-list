@@ -1,21 +1,11 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      demo: [
-        {
-          title: "FIRST",
-          background: "white",
-          initial: "white",
-        },
-        {
-          title: "SECOND",
-          background: "white",
-          initial: "white",
-        },
-      ],
       people: [],
       planets: [],
       vehicles: [],
+      favs: [],
+      currentPage: 1,
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -26,20 +16,35 @@ const getState = ({ getStore, getActions, setStore }) => {
       ///
 
       loadData: () => {
+        const store = getStore();
+
         const requestOptions = {
           method: "GET",
           redirect: "follow",
         };
 
-        fetch("https://www.swapi.tech/api/people", requestOptions)
+        //PEOPLE:
+
+        fetch(
+          `https://www.swapi.tech/api/people?page=${store.currentPage}&limit=10"`,
+          requestOptions
+        )
           .then((response) => response.json())
-          .then((result) => setStore({ people: result.results }))
+          .then((result) => {
+            setStore({
+              people: result.results,
+            });
+          })
           .catch((error) => console.log("error", error));
+
+        //VEHICLES:
 
         fetch("https://www.swapi.tech/api/vehicles", requestOptions)
           .then((response) => response.json())
-          .then((result) => setStore({ vehicles: result.results })) 
+          .then((result) => setStore({ vehicles: result.results }))
           .catch((error) => console.log("error", error));
+
+        //PLANETS:
 
         fetch("https://www.swapi.tech/api/planets", requestOptions)
           .then((response) => response.json())
@@ -49,20 +54,48 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       ///
 
-      changeColor: (index, color) => {
-        //get the store
+      addToFavs: (fav) => {
+        console.log(fav);
+
         const store = getStore();
 
-        //we have to loop the entire demo array to look for the respective index
-        //and change its color
-        const demo = store.demo.map((elm, i) => {
-          if (i === index) elm.background = color;
-          return elm;
-        });
+        const requestOptions = {
+          method: "GET",
+          redirect: "follow",
+        };
 
-        //reset the global store
-        setStore({ demo: demo });
+        fetch(`https://www.swapi.tech/api/people/${fav}`, requestOptions)
+          .then((response) => response.json())
+          .then((favObject) => {
+            console.log(favObject);
+            const newFavs = [...store.favs, favObject];
+            setStore({ favs: newFavs });
+          })
+
+          .catch((error) => console.log("error", error));
       },
+
+      ///
+
+      goToNextPage: () => {
+        const store = getStore();
+
+        setStore({ currentPage: store.currentPage + 1 });
+
+        console.log(store.currentPage);
+      },
+
+      ///
+
+      goToPreviousPage: () => {
+        const store = getStore();
+
+        setStore({ currentPage: store.currentPage - 1 });
+
+        console.log(store.currentPage);
+      },
+
+      ///
     },
   };
 };

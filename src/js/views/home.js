@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 
@@ -11,6 +11,14 @@ export const Home = () => {
       <div>
         <h1>Characters</h1>
 
+        {/*PREV AND NEXT BUTTONS */}
+
+        <button onClick={() => actions.goToPreviousPage()}>Previous</button>
+
+        <button onClick={() => actions.goToNextPage()}>Next</button>
+
+        {/*LIST OF PEOPLE */}
+
         {store.people.map((person) => (
           <div key={person.uid}>
             <img
@@ -18,7 +26,9 @@ export const Home = () => {
             />
 
             <Link to={`/person/${person.uid}`}>{person.name}</Link>
-            <button>Add to Fav</button>
+            <button onClick={() => actions.addToFavs(person.uid)}>
+              Add to Fav
+            </button>
           </div>
         ))}
       </div>
