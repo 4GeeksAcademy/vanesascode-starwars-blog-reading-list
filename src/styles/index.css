@@ -1,3 +1,91 @@
-img {
-  height: 100px;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300&display=swap");
+
+:root {
+  background-color: black;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: black;
+}
+
+.text-space {
+  letter-spacing: 5px;
+}
+
+/* NAVBAR */
+
+.navbar {
+  padding-bottom: 30px;
+}
+
+.flashy-border {
+  animation: border-flash 1s infinite;
+}
+
+.title {
+  font-weight: 200;
+}
+
+@keyframes border-flash {
+  0% {
+    border-color: red;
+    box-shadow: 0 0 5px red;
+  }
+  50% {
+    border-color: blue;
+    box-shadow: 0 0 10px blue;
+  }
+  100% {
+    border-color: green;
+    box-shadow: 0 0 15px green;
+  }
+}
+
+/* MENU TABS */
+
+.tab-button {
+  outline: none;
+  border: none;
+  background-color: black;
+  color: white;
+  margin: 15px;
+  font-size: 25px;
+  font-weight: 100;
+}
+
+.tab-button:hover {
+  font-weight: 300;
+}
+
+.up {
+  transition: all 0.3s;
+}
+.up:hover {
+  transform: translateY(-5px);
+}
+
+/* COLLECTION IMAGES*/
+
+.border-card {
+  min-width: 230px;
+}
+
+.img-size {
+  height: 200px;
+  width: 200px;
+  object-fit: contain;
+  border-radius: 100px;
+}
+
+.heart {
+  height: 20px;
+  width: 20px;
+}
+
+.heart-box {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  background-color: black;
 }

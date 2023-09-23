@@ -26,7 +26,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         //PEOPLE:
 
         fetch(
-          `https://www.swapi.tech/api/people?page=${store.currentPage}&limit=10"`,
+          `https://www.swapi.tech/api/people?page=1&limit=50"`,
           requestOptions
         )
           .then((response) => response.json())
