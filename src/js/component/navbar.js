@@ -10,10 +10,10 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <nav className=" bg-black py-3 ">
+    <nav className=" bg-black pt-3 container">
       <div className="d-flex align-items-center  justify-content-center navbar">
         {/*YODA*/}
-        <img src={Yoda} height="170px" className="me-3" />
+        <img src={Yoda} height="170px" className="me-5 d-lg-block d-none" />
         {/*LOGO*/}
         <Link to="/" className="text-decoration-none">
           <div className="d-flex flex-column">
@@ -24,7 +24,7 @@ export const Navbar = () => {
           </div>
         </Link>
         {/*LUKE*/}
-        <img src={Robots} height="170px" className="ms-3" />
+        <img src={Robots} height="170px" className="ms-5 d-lg-block d-none" />
       </div>
     </nav>
   );

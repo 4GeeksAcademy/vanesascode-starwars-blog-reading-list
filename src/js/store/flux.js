@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       vehicles: [],
       favs: [],
       currentPage: 1,
+      backToCollection: "characters",
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -26,7 +27,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         //PEOPLE:
 
         fetch(
-          `https://www.swapi.tech/api/people?page=1&limit=50"`,
+          `https://www.swapi.tech/api/people?page=1&limit=100"`,
           requestOptions
         )
           .then((response) => response.json())
@@ -39,14 +40,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         //VEHICLES:
 
-        fetch("https://www.swapi.tech/api/vehicles", requestOptions)
+        fetch(
+          "https://www.swapi.tech/api/vehicles?page=1&limit=20",
+          requestOptions
+        )
           .then((response) => response.json())
           .then((result) => setStore({ vehicles: result.results }))
           .catch((error) => console.log("error", error));
 
         //PLANETS:
 
-        fetch("https://www.swapi.tech/api/planets", requestOptions)
+        fetch(
+          "https://www.swapi.tech/api/planets?page=1&limit=18",
+          requestOptions
+        )
           .then((response) => response.json())
           .then((result) => setStore({ planets: result.results }))
           .catch((error) => console.log("error", error));
@@ -77,14 +84,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       ///
 
-      goToNextPage: () => {
+      handleBackToCollection: (collection) => {
         const store = getStore();
-
-        setStore({ currentPage: store.currentPage + 1 });
-
-        console.log(store.currentPage);
+        setStore({ backToCollection: collection });
+        console.log(store.backToCollection);
       },
-
       ///
 
       goToPreviousPage: () => {

@@ -7,10 +7,15 @@
 body {
   font-family: "Montserrat", sans-serif;
   background-color: black;
+  cursor: url("../img/heart.png"), auto;
 }
 
 .text-space {
   letter-spacing: 5px;
+}
+
+.mouse {
+  cursor: pointer;
 }
 
 /* NAVBAR */
@@ -50,8 +55,15 @@ body {
   background-color: black;
   color: white;
   margin: 15px;
-  font-size: 25px;
+  font-size: 16px;
   font-weight: 100;
+}
+
+@media (min-width: 768px) {
+  /* Styles for screens 768px and larger */
+  .tab-button {
+    font-size: 25px;
+  }
 }
 
 .tab-button:hover {
@@ -65,17 +77,12 @@ body {
   transform: translateY(-5px);
 }
 
-/* COLLECTION IMAGES*/
-
-.border-card {
-  min-width: 230px;
-}
+/* COLLECTIONS IMAGES*/
 
 .img-size {
   height: 200px;
   width: 200px;
-  object-fit: contain;
-  border-radius: 100px;
+  object-fit: cover;
 }
 
 .heart {
@@ -88,4 +95,62 @@ body {
   width: 50px;
   border-radius: 25px;
   background-color: black;
+}
+
+/* GENERAL COMPONENT*/
+
+.text-space-paragraph {
+  letter-spacing: 3px;
+}
+
+.data-box {
+  min-width: 250px;
+}
+
+.back-arrow {
+  height: 8px;
+  width: 30px;
+}
+
+.back-text {
+  font-size: 12px;
+}
+
+/* PERSON COMPONENT*/
+
+.img-character {
+  height: 530px;
+  width: 400px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* VEHICLE COMPONENT*/
+
+.img-vehicle {
+  height: 580px;
+  width: 375px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  /* Styles for screens 768px and larger */
+  .img-vehicle {
+    height: 650px;
+    width: 425px;
+  }
+}
+
+.data-box-vehicles {
+  min-width: 270px;
+}
+
+/* PLANET COMPONENT*/
+
+.img-planet {
+  height: 500px;
+  width: 500px;
+  border-radius: 10px;
+  object-fit: cover;
 }
