@@ -66,7 +66,7 @@ export const Vehicle = () => {
                 <p>Consumables: {vehiclesData.result.properties.consumables}</p>
                 <div className="d-flex justify-content-lg-start justify-content-center">
                   <button
-                    onClick={() => actions.addToFavs(person.uid)}
+                    // onClick={() => actions.addToFavs(person.uid)}
                     className=" mb-2 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
                   >
                     <img src={Heart} className="heart" />
