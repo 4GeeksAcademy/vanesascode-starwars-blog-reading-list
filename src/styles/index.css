@@ -120,16 +120,24 @@ body {
 
 .img-character {
   height: 530px;
-  width: 400px;
+  width: 350px;
   border-radius: 10px;
   object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  /* Styles for screens 768px and larger */
+  .img-vehicle {
+    height: 530px;
+    width: 400px;
+  }
 }
 
 /* VEHICLE COMPONENT*/
 
 .img-vehicle {
   height: 580px;
-  width: 375px;
+  width: 360px;
   border-radius: 10px;
   object-fit: cover;
 }
@@ -149,8 +157,16 @@ body {
 /* PLANET COMPONENT*/
 
 .img-planet {
-  height: 500px;
-  width: 500px;
+  height: 400px;
+  width: 400px;
   border-radius: 10px;
   object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  /* Styles for screens 768px and larger */
+  .img-planet {
+    height: 500px;
+    width: 500px;
+  }
 }

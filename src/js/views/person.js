@@ -35,19 +35,22 @@ export const Person = () => {
 
   return (
     <>
-      <div className="container py-5 text-light text-space">
+      <div className="container py-lg-5 py-0 text-light text-space">
         {personData ? (
           <div>
             <div className="d-flex flex-column flex-lg-row">
-              <div className="mx-md-5 d-flex justify-content-center mb-4 mb-md-0">
+              <h2 className="text-warning pb-1 d-block d-lg-none text-center">
+                {personData.result.properties.name}
+              </h2>
+              <div className=" d-flex justify-content-center mb-4 mb-md-0 align-items-center">
                 <img
                   src={`https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`}
                   className="img-character "
                 />
               </div>
               <div className="ms-0 ms-xl-0 ms-lg-5 data-box d-flex align-items-center flex-column mb-4 mb-md-0">
-                <div className="text-lg-start text-center mt-lg-0 mt-3">
-                  <h2 className="text-warning pb-1">
+                <div className="text-lg-start text-center ps-md-5 ps-0">
+                  <h2 className="text-warning pb-1 d-none d-lg-block">
                     {personData.result.properties.name}
                   </h2>
                   <p>Gender: {personData.result.properties.gender}</p>

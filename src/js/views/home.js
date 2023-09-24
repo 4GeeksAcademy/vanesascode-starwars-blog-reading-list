@@ -184,7 +184,7 @@ export const Home = () => {
                 {store.planets
                   .filter((planet, i) => i !== 0)
                   .map((planet) => (
-                    <div key={planet.uid} className="col-2  mx-5">
+                    <div key={planet.uid} className="col-6 col-lg-2  mx-5">
                       <div className="d-flex flex-column justify-content-center align-items-center">
                         <Link to={`/planet/${planet.uid}`}>
                           <img

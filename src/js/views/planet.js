@@ -34,10 +34,13 @@ export const Planet = () => {
   }, [uid]);
 
   return (
-    <div className="container py-5 text-light text-space">
+    <div className="container py-lg-5 py-0 text-light text-space">
       {planetsData ? (
         <div>
           <div className="d-flex flex-column flex-lg-row ">
+            <h2 className="text-warning pb-1 d-block d-lg-none text-center">
+              {planetsData.result.properties.name}
+            </h2>
             <div className="mx-md-5 d-flex justify-content-center mb-4 mb-md-0">
               <img
                 src={`https://starwars-visualguide.com/assets/img/planets/${uid}.jpg`}
@@ -50,8 +53,8 @@ export const Planet = () => {
               />
             </div>
             <div className=" ms-lg-5 data-box d-flex align-items-center flex-column mb-4 mb-md-0">
-              <div className="text-lg-start text-center mt-lg-0 mt-3">
-                <h2 className="text-warning pb-1">
+              <div className="text-lg-start text-center ps-md-5 ps-0">
+                <h2 className="text-warning pb-1 d-none d-lg-block">
                   {planetsData.result.properties.name}
                 </h2>
                 <p>Population: {planetsData.result.properties.population}</p>
@@ -79,10 +82,10 @@ export const Planet = () => {
                   </button>
                 </div>
                 <div
-                  className="d-flex align-items-center mt-4 justify-content-lg-start justify-content-center"
+                  className="d-flex align-items-center mt-4 justify-content-lg-start justify-content-center mouse"
                   onClick={handleBackPlanets}
                 >
-                  <img src={Back} className="back-arrow mb-3 mouse" />
+                  <img src={Back} className="back-arrow mb-3 " />
                   <p className="ms-4 back-text">Back to planets</p>
                 </div>
               </div>
