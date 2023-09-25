@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
 import Heart from "../../img/heart.png";
-// import Trash from "../../img/delete.svg";
+import Trash from "../../img/trash.png";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -286,9 +286,9 @@ export const Home = () => {
                         }}
                       />
                     </Link>
-                    <div>
-                      <img src={Heart} />
-                    </div>
+                    <button className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center">
+                      <img src={Trash} className="trash" />
+                    </button>
                     <p className="text-light text-center">
                       {fav.favObject.result.properties.name}
                     </p>
