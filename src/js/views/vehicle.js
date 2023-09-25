@@ -64,14 +64,20 @@ export const Vehicle = () => {
                   Speed: {vehiclesData.result.properties.max_atmosphering_speed}
                 </p>
                 <p>Consumables: {vehiclesData.result.properties.consumables}</p>
+
+                {/*FAVS BUTTON*/}
+
                 <div className="d-flex justify-content-lg-start justify-content-center">
                   <button
-                    // onClick={() => actions.addToFavs(person.uid)}
+                    onClick={() => actions.addToFavs(vehiclesData.result.uid)}
                     className=" mb-2 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
                   >
                     <img src={Heart} className="heart" />
                   </button>
                 </div>
+
+                {/*GO BACK BUTTON*/}
+
                 <div
                   className="d-flex align-items-center mt-4 mouse justify-content-lg-start justify-content-center"
                   onClick={handleBackVehicles}

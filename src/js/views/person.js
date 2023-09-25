@@ -60,14 +60,22 @@ export const Person = () => {
                   <p>Hair Color: {personData.result.properties.hair_color}</p>
                   <p>Height: {personData.result.properties.height}</p>
                   <p>Mass: {personData.result.properties.mass}</p>
+
+                  {/*FAVS BUTTON*/}
+
                   <div className="d-flex justify-content-lg-start justify-content-center">
                     <button
-                      // onClick={() => actions.addToFavs(person.uid)}
+                      onClick={() =>
+                        actions.addToFavs(personData.result.uid, "people")
+                      }
                       className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
                     >
                       <img src={Heart} className="heart" />
                     </button>
                   </div>
+
+                  {/*GO BACK BUTTON*/}
+
                   <div
                     className="d-flex align-items-center justify-content-center mt-4 mouse justify-content-lg-start justify-content-center"
                     onClick={handleback}

@@ -7,8 +7,6 @@ import Heart from "../../img/heart.png";
 export const Home = () => {
   const { store, actions } = useContext(Context);
 
-  const [favsOn, setfavsOn] = useState(false);
-
   const triggerTabList = document.querySelectorAll("#myTab button");
   triggerTabList.forEach((triggerEl) => {
     const tabTrigger = new bootstrap.Tab(triggerEl);
@@ -18,6 +16,13 @@ export const Home = () => {
       tabTrigger.show();
     });
   });
+
+  const handleFavsButton = (key, collection) => {
+    console.log(key);
+
+    actions.handleFavsCollection(collection);
+    actions.addToFavs(key);
+  };
 
   return (
     <>
@@ -111,8 +116,11 @@ export const Home = () => {
                         />
                       </Link>
 
+                      {/*FAVS BUTTON*/}
+
                       <button
-                        onClick={() => actions.addToFavs(person.uid)}
+                        onClick={() => handleFavsButton(person.uid, "people")}
+                        // onClick={() => actions.addToFavs(person.uid, "people")}
                         className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
                       >
                         <img src={Heart} className="heart" />
@@ -138,7 +146,7 @@ export const Home = () => {
             id="nav-profile"
             role="tabpanel"
             aria-labelledby="nav-profile-tab"
-            tabindex="0"
+            tabIndex="0"
           >
             <div className="container py-2">
               {/*CONTENT VEHICLES*/}
@@ -157,7 +165,16 @@ export const Home = () => {
                           }}
                         />
                       </Link>
-                      <button className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center">
+
+                      {/*FAVS BUTTON*/}
+
+                      <button
+                        onClick={() =>
+                          handleFavsButton(vehicle.uid, "vehicles")
+                        }
+                        // onClick={() => actions.addToFavs(vehicle.uid, "vehicles")}
+                        className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
+                      >
                         <img src={Heart} className="heart" />
                       </button>
                       <p className="text-decoration-none  text-light mb-5 text-center">
@@ -176,7 +193,7 @@ export const Home = () => {
             id="nav-contact"
             role="tabpanel"
             aria-labelledby="nav-contact-tab"
-            tabindex="0"
+            tabIndex="0"
           >
             <div className="container py-2">
               {/*CONTENT PLANETS*/}
@@ -197,7 +214,17 @@ export const Home = () => {
                             }}
                           />
                         </Link>
-                        <button className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center">
+
+                        {/*FAVS BUTTON*/}
+
+                        <button
+                          onClick={() =>
+                            handleFavsButton(planet.uid, "planets")
+                          }
+                          // onClick={() => actions.addToFavs(planet.uid, "planets")}
+
+                          className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
+                        >
                           <img src={Heart} className="heart" />
                         </button>
                         <p className="text-decoration-none  text-light mb-5 text-center">
@@ -217,23 +244,14 @@ export const Home = () => {
             id="nav-disabled"
             role="tabpanel"
             aria-labelledby="nav-disabled-tab"
-            tabindex="0"
+            tabIndex="0"
           >
-            {" "}
-            {/*CONTENT FAVS*/}{" "}
-            {favsOn ? (
-              store.favs.length > 0 ? (
-                store.favs.map((fav) => (
-                  <div key={fav.uid}>
-                    <p>{fav.name}</p>
-                  </div>
-                ))
-              ) : (
-                <p className="text-light">No favs added yet</p>
-              )
-            ) : (
-              ""
-            )}
+            {/*CONTENT FAVS*/}
+            {store.favs.map((fav) => (
+              <div key={fav.result.uid}>
+                <p className="text-white">{fav.result.properties.name}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
