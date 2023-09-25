@@ -1,11 +1,14 @@
 import React from "react";
 import { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Heart from "../../img/heart.png";
+// import Trash from "../../img/delete.svg";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
+
+  const navigate = useNavigate();
 
   const triggerTabList = document.querySelectorAll("#myTab button");
   triggerTabList.forEach((triggerEl) => {
@@ -86,9 +89,10 @@ export const Home = () => {
           </div>
         </nav>
 
-        {/*CONTENT 1 */}
+        {/*CONTENT OF TABS */}
 
         <div className="tab-content" id="nav-tabContent">
+          {/*CONTENT 1 */}
           <div
             className={`tab-pane fade ${
               store.backToCollection === "characters" ? "show active" : ""
@@ -186,6 +190,8 @@ export const Home = () => {
               </div>
             </div>
           </div>
+
+          {/*CONTENT 3 */}
           <div
             className={`tab-pane fade ${
               store.backToCollection === "planets" ? "show active" : ""
@@ -247,11 +253,49 @@ export const Home = () => {
             tabIndex="0"
           >
             {/*CONTENT FAVS*/}
-            {store.favs.map((fav) => (
-              <div key={fav.result.uid}>
-                <p className="text-white">{fav.result.properties.name}</p>
-              </div>
-            ))}
+            <div className="bg-black text-space row d-flex justify-content-center mb-5">
+              {store.favs.map((fav) => (
+                <div
+                  key={fav.favObject.result.uid}
+                  className="col-6 col-lg-2  mx-5 "
+                >
+                  <div className="d-flex flex-column justify-content-center align-items-center">
+                    <Link
+                      to={`/${
+                        fav.type === "people"
+                          ? "person"
+                          : fav.type === "vehicles"
+                          ? "vehicle"
+                          : "planet"
+                      }/${fav.favObject.result.uid}`}
+                      className="text-decoration-none"
+                    >
+                      <img
+                        src={`https://starwars-visualguide.com/assets/img/${
+                          fav.type === "people"
+                            ? "characters"
+                            : fav.type === "vehicles"
+                            ? "vehicles"
+                            : "planets"
+                        }/${fav.favObject.result.uid}.jpg`}
+                        className=" m-1 img-size rounded-circle "
+                        onError={({ currentTarget }) => {
+                          currentTarget.onerror = null;
+                          currentTarget.src =
+                            "https://starwars-visualguide.com/assets/img/placeholder.jpg";
+                        }}
+                      />
+                    </Link>
+                    <div>
+                      <img src={Heart} />
+                    </div>
+                    <p className="text-light text-center">
+                      {fav.favObject.result.properties.name}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

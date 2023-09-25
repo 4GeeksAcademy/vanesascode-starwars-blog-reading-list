@@ -60,9 +60,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((error) => console.log("error", error));
       },
 
-      //ADD TO FAVS FUNCTION///////////////////////////////////////////////////////////////
+      //ADD TO FAVS ///////////////////////////////////////////////////////////////
 
-      ///GET THE "collectionOfFav" PARAMETER (porque al conseguirlo como "fav" me da indefinido)
+      ///FUNCTION
 
       handleFavsCollection: (collection) => {
         const store = getStore();
@@ -89,35 +89,21 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((favObject) => {
             console.log(favObject);
-            const newFavs = [...store.favs, favObject];
+            console.log(store.collectionOfFav);
+            const completefavObject = {
+              type: store.collectionOfFav,
+              favObject: favObject,
+            };
+
+            console.log(completefavObject);
+            const newFavs = [...store.favs, completefavObject];
             setStore({ favs: newFavs });
           })
 
           .catch((error) => console.log("error", error));
+
+        getActions().loadData();
       },
-
-      ///OLD TRY ///////////////////////////////////////////////////////////////////////
-
-      // addToFavs: (fav) => {
-      //   console.log(fav);
-
-      //   const store = getStore();
-
-      //   const requestOptions = {
-      //     method: "GET",
-      //     redirect: "follow",
-      //   };
-
-      //   fetch(`https://www.swapi.tech/api/people/${fav}`, requestOptions)
-      //     .then((response) => response.json())
-      //     .then((favObject) => {
-      //       console.log(favObject);
-      //       const newFavs = [...store.favs, favObject];
-      //       setStore({ favs: newFavs });
-      //     })
-
-      //     .catch((error) => console.log("error", error));
-      // },
 
       ///GO BACK FROM A INDIVIDUAL PAGE INTO ITS OWN COLLECTION ///////////////////////////////////////
 

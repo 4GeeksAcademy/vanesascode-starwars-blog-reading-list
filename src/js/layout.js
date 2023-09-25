@@ -6,7 +6,6 @@ import { Home } from "./views/home";
 import { Vehicle } from "./views/vehicle";
 import { Planet } from "./views/planet";
 import { Person } from "./views/person";
-// import Favs  from "./views/favs";
 
 import injectContext from "./store/appContext";
 
@@ -32,8 +31,6 @@ const Layout = () => {
             <Route path="/planet/:uid" element={<Planet />} />
 
             <Route path="/vehicle/:uid" element={<Vehicle />} />
-
-            {/* <Route path="/favs/:uid" element={<Favs />} /> */}
 
             <Route path="*" element={<h1>Not found!</h1>} />
           </Routes>

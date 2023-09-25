@@ -7,7 +7,7 @@
 body {
   font-family: "Montserrat", sans-serif;
   background-color: black;
-  cursor: url("../img/heart.png"), auto;
+  cursor: url("../img/ColorLightSaber.cur"), pointer;
 }
 
 .text-space {
@@ -85,7 +85,8 @@ body {
   object-fit: cover;
 }
 
-.heart {
+.heart,
+.trash {
   height: 20px;
   width: 20px;
 }
@@ -128,7 +129,7 @@ body {
 @media (min-width: 768px) {
   /* Styles for screens 768px and larger */
   .img-vehicle {
-    height: 530px;
+    height: 550px;
     width: 400px;
   }
 }
