@@ -60,9 +60,17 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((error) => console.log("error", error));
       },
 
+      ///GO BACK FROM A INDIVIDUAL PAGE INTO ITS OWN COLLECTION ///////////////////////////////////////
+
+      handleBackToCollection: (collection) => {
+        const store = getStore();
+        setStore({ backToCollection: collection });
+        console.log(store.backToCollection);
+      },
+
       //ADD TO FAVS ///////////////////////////////////////////////////////////////
 
-      ///FUNCTION
+      ///FUNCTION to GET the INFO needed
 
       handleFavsCollection: (collection) => {
         const store = getStore();
@@ -70,7 +78,24 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log(store.collectionOfFav);
       },
 
-      ///FETCH
+      ///SAVE LOCAL STORAGE data
+
+      updateLocalStorage() {
+        localStorage.setItem("favs", JSON.stringify(getStore().favs));
+      },
+
+      ///GET LOCAL STORAGE data
+
+      getLocalStorageData() {
+        const storedFavString = localStorage.getItem("favs");
+
+        if (storedFavString) {
+          const storedFavs = JSON.parse(storedFavString);
+          setStore({ favs: storedFavs });
+        }
+      },
+
+      ///FETCH the FAVS array
 
       addToFavs: (fav, collection) => {
         const store = getStore();
@@ -103,6 +128,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               console.log(completefavObject);
               const newFavs = [...store.favs, completefavObject];
               setStore({ favs: newFavs });
+              getActions().updateLocalStorage();
             })
 
             .catch((error) => console.log("error", error));
@@ -111,15 +137,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      ///GO BACK FROM A INDIVIDUAL PAGE INTO ITS OWN COLLECTION ///////////////////////////////////////
-
-      handleBackToCollection: (collection) => {
-        const store = getStore();
-        setStore({ backToCollection: collection });
-        console.log(store.backToCollection);
-      },
-
-      /////////////////////////////////////////////////////////////////////////////////////////////////
+      ///REMOVE FAVS items
 
       removeFav: (type, name) => {
         const store = getStore();
@@ -129,6 +147,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           (item) => item.favObject.result.properties.name !== name
         );
         setStore({ favs: newFavs });
+        getActions().updateLocalStorage();
       },
     },
   };

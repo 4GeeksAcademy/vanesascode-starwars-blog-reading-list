@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
@@ -26,6 +26,8 @@ export const Home = () => {
     actions.handleFavsCollection(collection);
     actions.addToFavs(key, collection);
   };
+
+
 
   return (
     <>
@@ -297,7 +299,10 @@ export const Home = () => {
 
                     <button
                       onClick={() =>
-                        actions.removeFav(fav.type, fav.favObject.result.properties.name)
+                        actions.removeFav(
+                          fav.type,
+                          fav.favObject.result.properties.name
+                        )
                       }
                       className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
                     >
