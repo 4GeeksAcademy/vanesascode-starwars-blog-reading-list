@@ -39,7 +39,9 @@ export const Home = () => {
             role="tablist"
           >
             <button
-              className="tab-button text-space up active"
+              className={`tab-button text-space up ${
+                store.backToCollection === "characters" ? "active" : ""
+              }`}
               id="nav-home-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-home"
@@ -51,7 +53,9 @@ export const Home = () => {
               Characters
             </button>
             <button
-              className="tab-button text-space up "
+              className={`tab-button text-space up ${
+                store.backToCollection === "vehicles" ? "active" : ""
+              }`}
               id="nav-profile-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-profile"
@@ -63,7 +67,9 @@ export const Home = () => {
               Vehicles
             </button>
             <button
-              className="tab-button text-space up"
+              className={`tab-button text-space up ${
+                store.backToCollection === "planets" ? "active" : ""
+              }`}
               id="nav-contact-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-contact"
@@ -286,9 +292,18 @@ export const Home = () => {
                         }}
                       />
                     </Link>
-                    <button className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center">
+
+                    {/*ELIMINATE FAVOURITE*/}
+
+                    <button
+                      onClick={() =>
+                        actions.removeFav(fav.type, fav.favObject.result.uid)
+                      }
+                      className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
+                    >
                       <img src={Trash} className="trash" />
                     </button>
+
                     <p className="text-light text-center">
                       {fav.favObject.result.properties.name}
                     </p>

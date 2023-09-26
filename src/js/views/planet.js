@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Heart from "../../img/heart.png";
-import Back from "../../img/back-arrow.png";
+import heart from "../../img/heart.png";
+import back from "../../img/back.png";
 import { Context } from "../store/appContext";
 
 export const Planet = () => {
@@ -81,7 +81,7 @@ export const Planet = () => {
                     onClick={() => actions.addToFavs(planetsData.result.uid)}
                     className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
                   >
-                    <img src={Heart} className="heart" />
+                    <img src={heart} className="heart" />
                   </button>
                 </div>
 
@@ -91,7 +91,7 @@ export const Planet = () => {
                   className="d-flex align-items-center mt-4 justify-content-lg-start justify-content-center mouse"
                   onClick={handleBackPlanets}
                 >
-                  <img src={Back} className="back-arrow mb-3 " />
+                  <img src={back} className="back-arrow mb-3 " />
                   <p className="ms-4 back-text">Back to planets</p>
                 </div>
               </div>

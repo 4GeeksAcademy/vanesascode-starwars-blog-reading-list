@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import Heart from "../../img/heart.png";
-import Back from "../../img/back-arrow.png";
+import heart from "../../img/heart.png";
+import back from "../../img/back.png";
 
 export const Person = () => {
   const { uid } = useParams();
@@ -38,18 +38,20 @@ export const Person = () => {
       <div className="container py-lg-5 py-0 text-light text-space">
         {personData ? (
           <div>
-            <div className="d-flex flex-column flex-lg-row">
+            <div className="d-flex flex-column flex-lg-row justify-content-start">
               <h2 className="text-warning pb-1 d-block d-lg-none text-center">
                 {personData.result.properties.name}
               </h2>
-              <div className=" d-flex justify-content-center mb-4 mb-md-0 align-items-center">
+
+              <div className=" d-flex justify-content-center mb-4 mb-lg-0 align-items-start ">
                 <img
                   src={`https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`}
                   className="img-character "
                 />
               </div>
-              <div className="ms-0 ms-xl-0 ms-lg-5 data-box d-flex align-items-center flex-column mb-4 mb-md-0">
-                <div className="text-lg-start text-center ps-md-5 ps-0">
+
+              <div className="ms-0 ms-xl-0 ms-lg-5  data-box d-flex align-items-center flex-column mb-4 mb-md-0">
+                <div className="text-lg-start text-center ps-md-5 ps-0 ">
                   <h2 className="text-warning pb-1 d-none d-lg-block">
                     {personData.result.properties.name}
                   </h2>
@@ -70,7 +72,7 @@ export const Person = () => {
                       }
                       className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
                     >
-                      <img src={Heart} className="heart" />
+                      <img src={heart} className="heart" />
                     </button>
                   </div>
 
@@ -80,12 +82,12 @@ export const Person = () => {
                     className="d-flex align-items-center justify-content-center mt-4 mouse justify-content-lg-start justify-content-center"
                     onClick={handleback}
                   >
-                    <img src={Back} className="back-arrow mb-3" />
+                    <img src={back} className="back-arrow mb-3" />
                     <p className="ms-4 back-text">Back to characters</p>
                   </div>
                 </div>
               </div>
-              <div className="ms-md-5 d-none d-xl-block">
+              <div className="ms-md-5 d-none d-xl-block ms-0 px-xxl-5">
                 The Star Wars universe is filled with captivating characters,
                 each with their own allure and story to tell. From the valiant
                 Jedi Knights to the formidable Sith Lords, characters like Luke

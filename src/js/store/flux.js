@@ -115,6 +115,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       /////////////////////////////////////////////////////////////////////////////////////////////////
 
+      removeFav: (type, uid) => {
+        const store = getStore();
+        const newFavs = store.favs.filter(
+          (item) => item.favObject.result.uid !== uid && item.type !== type
+        );
+        setStore({ favs: newFavs });
+      },
+
       // goToPreviousPage: () => {
       //   const store = getStore();
 
