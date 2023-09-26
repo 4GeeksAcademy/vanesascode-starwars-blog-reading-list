@@ -10,7 +10,7 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <nav className=" bg-black pt-3 container">
+    <nav className="  pt-3 container">
       <div className="d-flex align-items-center  justify-content-center navbar">
         {/*YODA*/}
         <img src={Yoda} height="170px" className="me-5 d-lg-block d-none" />

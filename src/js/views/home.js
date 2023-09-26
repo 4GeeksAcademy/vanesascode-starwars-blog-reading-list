@@ -33,7 +33,7 @@ export const Home = () => {
 
   return (
     <>
-      <div className="bg-black container">
+      <div className=" container">
         {/*TABS */}
 
         <nav className="sticky-top bg-black">
@@ -114,7 +114,7 @@ export const Home = () => {
           >
             <div className="container py-2">
               {/*CONTENT CHARACTERS*/}
-              <div className="bg-black text-space row d-flex justify-content-center">
+              <div className=" text-space row d-flex justify-content-center">
                 {store.people.map((person) => (
                   <div key={person.uid} className="col-6 col-lg-2  mx-5">
                     <div className="d-flex flex-column justify-content-center align-items-center ">
@@ -172,7 +172,7 @@ export const Home = () => {
           >
             <div className="container py-2">
               {/*CONTENT VEHICLES*/}
-              <div className="bg-black text-space row d-flex justify-content-center">
+              <div className=" text-space row d-flex justify-content-center">
                 {store.vehicles.map((vehicle) => (
                   <div key={vehicle.uid} className="col-6 col-lg-2  mx-5">
                     <div className="d-flex flex-column justify-content-center align-items-center">
@@ -229,7 +229,7 @@ export const Home = () => {
           >
             <div className="container py-2">
               {/*CONTENT PLANETS*/}
-              <div className="bg-black text-space row d-flex justify-content-center">
+              <div className=" text-space row d-flex justify-content-center">
                 {store.planets
                   .filter((planet, i) => i !== 0)
                   .map((planet) => (
@@ -290,7 +290,7 @@ export const Home = () => {
           >
             <div className="container py-2">
               {/*CONTENT FAVS*/}
-              <div className="bg-black text-space row d-flex justify-content-center mb-5">
+              <div className=" text-space row d-flex justify-content-center mb-5">
                 {store.favs.map((fav) => (
                   <div
                     key={fav.favObject.result.uid}
