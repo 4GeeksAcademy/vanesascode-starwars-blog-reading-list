@@ -72,37 +72,43 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       ///FETCH
 
-      addToFavs: (fav) => {
+      addToFavs: (fav, collection) => {
         const store = getStore();
-        console.log(fav);
-        console.log(store.collectionOfFav);
+        const existingFav = store.favs.find(
+          (item) =>
+            item.favObject.result.uid === fav && item.type === collection
+        );
+        // console.log(fav);
+        // console.log(store.collectionOfFav);
 
-        const requestOptions = {
-          method: "GET",
-          redirect: "follow",
-        };
+        if (!existingFav) {
+          const requestOptions = {
+            method: "GET",
+            redirect: "follow",
+          };
 
-        fetch(
-          `https://www.swapi.tech/api/${store.collectionOfFav}/${fav}`,
-          requestOptions
-        )
-          .then((response) => response.json())
-          .then((favObject) => {
-            console.log(favObject);
-            console.log(store.collectionOfFav);
-            const completefavObject = {
-              type: store.collectionOfFav,
-              favObject: favObject,
-            };
+          fetch(
+            `https://www.swapi.tech/api/${store.collectionOfFav}/${fav}`,
+            requestOptions
+          )
+            .then((response) => response.json())
+            .then((favObject) => {
+              // console.log(favObject);
+              // console.log(store.collectionOfFav);
+              const completefavObject = {
+                type: store.collectionOfFav,
+                favObject: favObject,
+              };
 
-            console.log(completefavObject);
-            const newFavs = [...store.favs, completefavObject];
-            setStore({ favs: newFavs });
-          })
+              console.log(completefavObject);
+              const newFavs = [...store.favs, completefavObject];
+              setStore({ favs: newFavs });
+            })
 
-          .catch((error) => console.log("error", error));
+            .catch((error) => console.log("error", error));
 
-        getActions().loadData();
+          getActions().loadData();
+        }
       },
 
       ///GO BACK FROM A INDIVIDUAL PAGE INTO ITS OWN COLLECTION ///////////////////////////////////////
@@ -115,23 +121,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       /////////////////////////////////////////////////////////////////////////////////////////////////
 
-      removeFav: (type, uid) => {
+      removeFav: (type, name) => {
         const store = getStore();
+        console.log(type);
+        console.log(name);
         const newFavs = store.favs.filter(
-          (item) => item.favObject.result.uid !== uid && item.type !== type
+          (item) => item.favObject.result.properties.name !== name
         );
         setStore({ favs: newFavs });
       },
-
-      // goToPreviousPage: () => {
-      //   const store = getStore();
-
-      //   setStore({ currentPage: store.currentPage - 1 });
-
-      //   console.log(store.currentPage);
-      // },
-
-      ///
     },
   };
 };

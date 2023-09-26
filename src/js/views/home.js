@@ -24,7 +24,7 @@ export const Home = () => {
     console.log(key);
 
     actions.handleFavsCollection(collection);
-    actions.addToFavs(key);
+    actions.addToFavs(key, collection);
   };
 
   return (
@@ -297,7 +297,7 @@ export const Home = () => {
 
                     <button
                       onClick={() =>
-                        actions.removeFav(fav.type, fav.favObject.result.uid)
+                        actions.removeFav(fav.type, fav.favObject.result.properties.name)
                       }
                       className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
                     >
