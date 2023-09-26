@@ -7,6 +7,7 @@ import { Context } from "../store/appContext";
 export const Planet = () => {
   const { uid } = useParams();
   const [planetsData, setPlanetsData] = useState(null);
+  const [showFavsMessage, setShowFavsMessage] = useState(null);
 
   const navigate = useNavigate();
 
@@ -15,6 +16,12 @@ export const Planet = () => {
   const handleBackPlanets = () => {
     actions.handleBackToCollection("planets");
     navigate("/");
+  };
+
+  const handleFavsButton = (key, collection) => {
+    actions.addToFavs(key, collection);
+    setShowFavsMessage(key);
+    setTimeout(() => setShowFavsMessage(null), 2000);
   };
 
   useEffect(() => {
@@ -77,12 +84,30 @@ export const Planet = () => {
                 {/*FAVS BUTTON*/}
 
                 <div className="d-flex justify-content-lg-start justify-content-center">
-                  <button
-                    onClick={() => actions.addToFavs(planetsData.result.uid)}
-                    className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
+                  <div
+                    onClick={() =>
+                      handleFavsButton(planetsData.result.uid, "planets")
+                    }
+                    className={
+                      showFavsMessage === planetsData.result.uid
+                        ? "my-3 bg-black  d-flex justify-content-center align-items-center  cursor-pointer"
+                        : "my-3 flashy-border text-light text-space border-4 outline-none heart-box  d-flex justify-content-center align-items-center"
+                    }
                   >
-                    <img src={heart} className="heart" />
-                  </button>
+                    <img
+                      src={heart}
+                      className={
+                        showFavsMessage === planetsData.result.uid
+                          ? "d-none"
+                          : "heart"
+                      }
+                    />
+                    {showFavsMessage === planetsData.result.uid && (
+                      <div className="text-warning text-space">
+                        Added to favourites!
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 {/*GO BACK BUTTON*/}

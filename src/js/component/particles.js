@@ -389,7 +389,7 @@ const ParticlesComponent = (props) => {
             enable: false,
             minimumValue: 1,
           },
-          value: 3,
+          value: 1,
           animation: {
             count: 0,
             enable: false,

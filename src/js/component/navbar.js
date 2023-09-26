@@ -15,12 +15,12 @@ export const Navbar = () => {
         {/*YODA*/}
         <img src={Yoda} height="170px" className="me-5 d-lg-block d-none" />
         {/*LOGO*/}
-        <Link to="/" className="text-decoration-none">
+        <Link to="/" className="text-decoration-none cursor-pointer">
           <div className="d-flex flex-column">
             <img src={Logo} height="100px" />
-            <button className="flashy-border btn btn-black text-light text-space border-4 outline-none rounded-pill mt-3 title">
+            <div className="flashy-border px-4 d-flex justify-content-center py-2 border-none text-light bg-black text-space  outline-none rounded-pill mt-3 title">
               READING LIST
-            </button>
+            </div>
           </div>
         </Link>
         {/*LUKE*/}

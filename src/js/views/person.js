@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import heart from "../../img/heart.png";
+import heart from "./heart.png";
 import back from "../../img/back.png";
 
 export const Person = () => {
   const { uid } = useParams();
   const [personData, setPersonData] = useState(null);
+  const [showFavsMessage, setShowFavsMessage] = useState(null);
 
   const { store, actions } = useContext(Context);
 
@@ -15,6 +16,12 @@ export const Person = () => {
   const handleback = () => {
     actions.handleBackToCollection("characters");
     navigate("/");
+  };
+
+  const handleFavsButton = (key, collection) => {
+    actions.addToFavs(key, collection);
+    setShowFavsMessage(key);
+    setTimeout(() => setShowFavsMessage(null), 2000);
   };
 
   useEffect(() => {
@@ -66,14 +73,30 @@ export const Person = () => {
                   {/*FAVS BUTTON*/}
 
                   <div className="d-flex justify-content-lg-start justify-content-center">
-                    <button
+                    <div
                       onClick={() =>
-                        actions.addToFavs(personData.result.uid, "people")
+                        handleFavsButton(personData.result.uid, "people")
                       }
-                      className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
+                      className={
+                        showFavsMessage === personData.result.uid
+                          ? "my-3 bg-black  d-flex justify-content-center align-items-center  cursor-pointer"
+                          : "my-3 flashy-border text-light text-space border-4 outline-none heart-box  d-flex justify-content-center align-items-center"
+                      }
                     >
-                      <img src={heart} className="heart" />
-                    </button>
+                      <img
+                        src={heart}
+                        className={
+                          showFavsMessage === personData.result.uid
+                            ? "d-none"
+                            : "heart"
+                        }
+                      />
+                      {showFavsMessage === personData.result.uid && (
+                        <div className="text-warning text-space">
+                          Added to favourites!
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   {/*GO BACK BUTTON*/}

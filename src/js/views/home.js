@@ -11,16 +11,6 @@ export const Home = () => {
 
   const navigate = useNavigate();
 
-  // const triggerTabList = document.querySelectorAll("#myTab button");
-  // triggerTabList.forEach((triggerEl) => {
-  //   const tabTrigger = new bootstrap.Tab(triggerEl);
-
-  //   triggerEl.addEventListener("click", (event) => {
-  //     event.preventDefault();
-  //     tabTrigger.show();
-  //   });
-  // });
-
   const handleFavsButton = (key, collection) => {
     console.log(key);
 
@@ -132,10 +122,15 @@ export const Home = () => {
 
                       {/*FAVS BUTTON*/}
 
-                      <button
+                      <div
                         onClick={() => handleFavsButton(person.uid, "people")}
                         // onClick={() => actions.addToFavs(person.uid, "people")}
-                        className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
+                        // className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
+                        className={
+                          showFavsMessage === person.uid
+                            ? "my-3 bg-black  d-flex justify-content-center align-items-center text-center cursor-pointer"
+                            : "my-3 flashy-border text-light text-space border-4 outline-none heart-box  d-flex justify-content-center align-items-center"
+                        }
                       >
                         <img
                           src={Heart}
@@ -144,9 +139,11 @@ export const Home = () => {
                           }
                         />
                         {showFavsMessage === person.uid && (
-                          <div>Added to favourites!</div>
+                          <div className="text-warning text-space">
+                            Added to favourites!
+                          </div>
                         )}
-                      </button>
+                      </div>
 
                       <p className="text-decoration-none  text-light  text-center">
                         {" "}
@@ -190,12 +187,17 @@ export const Home = () => {
 
                       {/*FAVS BUTTON*/}
 
-                      <button
+                      <div
                         onClick={() =>
                           handleFavsButton(vehicle.uid, "vehicles")
                         }
                         // onClick={() => actions.addToFavs(vehicle.uid, "vehicles")}
-                        className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
+                        // className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
+                        className={
+                          showFavsMessage === vehicle.uid
+                            ? "my-3 bg-black  d-flex justify-content-center align-items-center text-center cursor-pointer"
+                            : "my-3 flashy-border text-light text-space border-4 outline-none heart-box  d-flex justify-content-center align-items-center"
+                        }
                       >
                         <img
                           src={Heart}
@@ -204,9 +206,11 @@ export const Home = () => {
                           }
                         />
                         {showFavsMessage === vehicle.uid && (
-                          <div>Added to favourites!</div>
+                          <div className="text-light text-space">
+                            Added to favourites!
+                          </div>
                         )}
-                      </button>
+                      </div>
                       <p className="text-decoration-none  text-light mb-5 text-center">
                         {vehicle.name}
                       </p>
@@ -249,13 +253,18 @@ export const Home = () => {
 
                         {/*FAVS BUTTON*/}
 
-                        <button
+                        <div
                           onClick={() =>
                             handleFavsButton(planet.uid, "planets")
                           }
                           // onClick={() => actions.addToFavs(planet.uid, "planets")}
 
-                          className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
+                          // className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
+                          className={
+                            showFavsMessage === planet.uid
+                              ? "my-3 bg-black  d-flex justify-content-center align-items-center text-center cursor-pointer"
+                              : "my-3 flashy-border text-light text-space border-4 outline-none heart-box  d-flex justify-content-center align-items-center"
+                          }
                         >
                           <img
                             src={Heart}
@@ -266,9 +275,11 @@ export const Home = () => {
                             }
                           />
                           {showFavsMessage === planet.uid && (
-                            <div>Added to favourites!</div>
+                            <div className="text-light text-space">
+                              Added to favourites!
+                            </div>
                           )}
-                        </button>
+                        </div>
                         <p className="text-decoration-none  text-light mb-5 text-center">
                           {planet.name}
                         </p>
@@ -326,7 +337,7 @@ export const Home = () => {
 
                       {/*ELIMINATE FAVOURITE*/}
 
-                      <button
+                      <div
                         onClick={() =>
                           actions.removeFav(
                             fav.type,
@@ -336,7 +347,7 @@ export const Home = () => {
                         className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
                       >
                         <img src={Trash} className="trash" />
-                      </button>
+                      </div>
 
                       <p className="text-light text-center">
                         {fav.favObject.result.properties.name}

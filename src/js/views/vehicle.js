@@ -7,6 +7,7 @@ import { Context } from "../store/appContext";
 export const Vehicle = () => {
   const { uid } = useParams();
   const [vehiclesData, setVehiclesData] = useState(null);
+  const [showFavsMessage, setShowFavsMessage] = useState(null);
 
   const { store, actions } = useContext(Context);
 
@@ -15,6 +16,12 @@ export const Vehicle = () => {
   const handleBackVehicles = () => {
     actions.handleBackToCollection("vehicles");
     navigate("/");
+  };
+
+  const handleFavsButton = (key, collection) => {
+    actions.addToFavs(key, collection);
+    setShowFavsMessage(key);
+    setTimeout(() => setShowFavsMessage(null), 2000);
   };
 
   useEffect(() => {
@@ -68,12 +75,30 @@ export const Vehicle = () => {
                 {/*FAVS BUTTON*/}
 
                 <div className="d-flex justify-content-lg-start justify-content-center">
-                  <button
-                    onClick={() => actions.addToFavs(vehiclesData.result.uid)}
-                    className=" mb-2 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
+                  <div
+                    onClick={() =>
+                      handleFavsButton(vehiclesData.result.uid, "vehicles")
+                    }
+                    className={
+                      showFavsMessage === vehiclesData.result.uid
+                        ? "my-3 bg-black  d-flex justify-content-center align-items-center  cursor-pointer"
+                        : "my-3 flashy-border text-light text-space border-4 outline-none heart-box  d-flex justify-content-center align-items-center"
+                    }
                   >
-                    <img src={heart} className="heart" />
-                  </button>
+                    <img
+                      src={heart}
+                      className={
+                        showFavsMessage === vehiclesData.result.uid
+                          ? "d-none"
+                          : "heart"
+                      }
+                    />
+                    {showFavsMessage === vehiclesData.result.uid && (
+                      <div className="text-warning text-space">
+                        Added to favourites!
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 {/*GO BACK BUTTON*/}
