@@ -206,7 +206,7 @@ export const Home = () => {
                           }
                         />
                         {showFavsMessage === vehicle.uid && (
-                          <div className="text-light text-space">
+                          <div className="text-warning text-space">
                             Added to favourites!
                           </div>
                         )}
@@ -275,7 +275,7 @@ export const Home = () => {
                             }
                           />
                           {showFavsMessage === planet.uid && (
-                            <div className="text-light text-space">
+                            <div className="text-warning text-space">
                               Added to favourites!
                             </div>
                           )}
