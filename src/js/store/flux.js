@@ -137,7 +137,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      ///REMOVE FAVS items
+      ///REMOVE FAVS ///////////////////////////////////////////////////////////////////////
 
       removeFav: (type, name) => {
         const store = getStore();

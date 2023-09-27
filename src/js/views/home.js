@@ -1,28 +1,27 @@
-import React, { useEffect } from "react";
-import { useContext, useState } from "react";
+import React from "react";
+import { useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link, useNavigate } from "react-router-dom";
-import Heart from "../../img/heart.png";
-import Trash from "../../img/trash.png";
+
+//COMPONENTS:
+
+import PersonCollection from "../component/PersonCollection";
+import VehicleCollection from "../component/VehicleCollection";
+import PlanetCollection from "../component/PlanetCollection";
+import FavsCollection from "../component/FavsCollection";
+
+//AUDIO:
+
+// import ReactAudioPlayer from "react-audio-player";
+// import shot from "./shot.mp3";
 
 export const Home = () => {
-  const { store, actions } = useContext(Context);
-  const [showFavsMessage, setShowFavsMessage] = useState(null);
+  //CONTEXT
 
-  const navigate = useNavigate();
-
-  const handleFavsButton = (key, collection) => {
-    console.log(key);
-
-    actions.handleFavsCollection(collection);
-    actions.addToFavs(key, collection);
-
-    setShowFavsMessage(key);
-    setTimeout(() => setShowFavsMessage(null), 2000);
-  };
+  const { store } = useContext(Context);
 
   return (
     <>
+      {/* <ReactAudioPlayer src="./blastershot.wav" controls /> */}
       <div className=" container">
         {/*TABS */}
 
@@ -84,7 +83,7 @@ export const Home = () => {
               aria-controls="nav-disabled"
               aria-selected="false"
             >
-              Favourites
+              Favourites <span>({store.favs.length})</span>
             </button>
           </div>
         </nav>
@@ -93,6 +92,7 @@ export const Home = () => {
 
         <div className="tab-content" id="nav-tabContent">
           {/*CONTENT 1 */}
+
           <div
             className={`tab-pane fade ${
               store.backToCollection === "characters" ? "show active" : ""
@@ -106,51 +106,7 @@ export const Home = () => {
               {/*CONTENT CHARACTERS*/}
               <div className=" text-space row d-flex justify-content-center">
                 {store.people.map((person) => (
-                  <div key={person.uid} className="col-6 col-lg-2  mx-5">
-                    <div className="d-flex flex-column justify-content-center align-items-center ">
-                      <Link to={`/person/${person.uid}`}>
-                        <img
-                          src={`https://starwars-visualguide.com/assets/img/characters/${person.uid}.jpg`}
-                          className=" m-1 img-size rounded-circle "
-                          onError={({ currentTarget }) => {
-                            currentTarget.onerror = null;
-                            currentTarget.src =
-                              "https://starwars-visualguide.com/assets/img/placeholder.jpg";
-                          }}
-                        />
-                      </Link>
-
-                      {/*FAVS BUTTON*/}
-
-                      <div
-                        onClick={() => handleFavsButton(person.uid, "people")}
-                        // onClick={() => actions.addToFavs(person.uid, "people")}
-                        // className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
-                        className={
-                          showFavsMessage === person.uid
-                            ? "my-3 bg-black  d-flex justify-content-center align-items-center text-center cursor-pointer"
-                            : "my-3 flashy-border text-light text-space border-4 outline-none heart-box  d-flex justify-content-center align-items-center"
-                        }
-                      >
-                        <img
-                          src={Heart}
-                          className={
-                            showFavsMessage === person.uid ? "d-none" : "heart"
-                          }
-                        />
-                        {showFavsMessage === person.uid && (
-                          <div className="text-warning text-space">
-                            Added to favourites!
-                          </div>
-                        )}
-                      </div>
-
-                      <p className="text-decoration-none  text-light  text-center">
-                        {" "}
-                        {person.name}
-                      </p>
-                    </div>
-                  </div>
+                  <PersonCollection person={person} />
                 ))}
               </div>
             </div>
@@ -171,51 +127,7 @@ export const Home = () => {
               {/*CONTENT VEHICLES*/}
               <div className=" text-space row d-flex justify-content-center">
                 {store.vehicles.map((vehicle) => (
-                  <div key={vehicle.uid} className="col-6 col-lg-2  mx-5">
-                    <div className="d-flex flex-column justify-content-center align-items-center">
-                      <Link to={`/vehicle/${vehicle.uid}`}>
-                        <img
-                          src={`https://starwars-visualguide.com/assets/img/vehicles/${vehicle.uid}.jpg`}
-                          className=" m-1 img-size rounded-circle"
-                          onError={({ currentTarget }) => {
-                            currentTarget.onerror = null;
-                            currentTarget.src =
-                              "https://starwars-visualguide.com/assets/img/placeholder.jpg";
-                          }}
-                        />
-                      </Link>
-
-                      {/*FAVS BUTTON*/}
-
-                      <div
-                        onClick={() =>
-                          handleFavsButton(vehicle.uid, "vehicles")
-                        }
-                        // onClick={() => actions.addToFavs(vehicle.uid, "vehicles")}
-                        // className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
-                        className={
-                          showFavsMessage === vehicle.uid
-                            ? "my-3 bg-black  d-flex justify-content-center align-items-center text-center cursor-pointer"
-                            : "my-3 flashy-border text-light text-space border-4 outline-none heart-box  d-flex justify-content-center align-items-center"
-                        }
-                      >
-                        <img
-                          src={Heart}
-                          className={
-                            showFavsMessage === vehicle.uid ? "d-none" : "heart"
-                          }
-                        />
-                        {showFavsMessage === vehicle.uid && (
-                          <div className="text-warning text-space">
-                            Added to favourites!
-                          </div>
-                        )}
-                      </div>
-                      <p className="text-decoration-none  text-light mb-5 text-center">
-                        {vehicle.name}
-                      </p>
-                    </div>
-                  </div>
+                  <VehicleCollection vehicle={vehicle} />
                 ))}
               </div>
             </div>
@@ -237,54 +149,7 @@ export const Home = () => {
                 {store.planets
                   .filter((planet, i) => i !== 0)
                   .map((planet) => (
-                    <div key={planet.uid} className="col-6 col-lg-2  mx-5">
-                      <div className="d-flex flex-column justify-content-center align-items-center">
-                        <Link to={`/planet/${planet.uid}`}>
-                          <img
-                            src={`https://starwars-visualguide.com/assets/img/planets/${planet.uid}.jpg`}
-                            className=" m-1 img-size rounded-circle"
-                            onError={({ currentTarget }) => {
-                              currentTarget.onerror = null;
-                              currentTarget.src =
-                                "https://starwars-visualguide.com/assets/img/placeholder.jpg";
-                            }}
-                          />
-                        </Link>
-
-                        {/*FAVS BUTTON*/}
-
-                        <div
-                          onClick={() =>
-                            handleFavsButton(planet.uid, "planets")
-                          }
-                          // onClick={() => actions.addToFavs(planet.uid, "planets")}
-
-                          // className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
-                          className={
-                            showFavsMessage === planet.uid
-                              ? "my-3 bg-black  d-flex justify-content-center align-items-center text-center cursor-pointer"
-                              : "my-3 flashy-border text-light text-space border-4 outline-none heart-box  d-flex justify-content-center align-items-center"
-                          }
-                        >
-                          <img
-                            src={Heart}
-                            className={
-                              showFavsMessage === planet.uid
-                                ? "d-none"
-                                : "heart"
-                            }
-                          />
-                          {showFavsMessage === planet.uid && (
-                            <div className="text-warning text-space">
-                              Added to favourites!
-                            </div>
-                          )}
-                        </div>
-                        <p className="text-decoration-none  text-light mb-5 text-center">
-                          {planet.name}
-                        </p>
-                      </div>
-                    </div>
+                    <PlanetCollection planet={planet} />
                   ))}
               </div>
             </div>
@@ -303,57 +168,7 @@ export const Home = () => {
               {/*CONTENT FAVS*/}
               <div className=" text-space row d-flex justify-content-center mb-5">
                 {store.favs.map((fav) => (
-                  <div
-                    key={fav.favObject.result.uid}
-                    className="col-6 col-lg-2  mx-5 "
-                  >
-                    <div className="d-flex flex-column justify-content-center align-items-center">
-                      <Link
-                        to={`/${
-                          fav.type === "people"
-                            ? "person"
-                            : fav.type === "vehicles"
-                            ? "vehicle"
-                            : "planet"
-                        }/${fav.favObject.result.uid}`}
-                        className="text-decoration-none"
-                      >
-                        <img
-                          src={`https://starwars-visualguide.com/assets/img/${
-                            fav.type === "people"
-                              ? "characters"
-                              : fav.type === "vehicles"
-                              ? "vehicles"
-                              : "planets"
-                          }/${fav.favObject.result.uid}.jpg`}
-                          className=" m-1 img-size rounded-circle "
-                          onError={({ currentTarget }) => {
-                            currentTarget.onerror = null;
-                            currentTarget.src =
-                              "https://starwars-visualguide.com/assets/img/placeholder.jpg";
-                          }}
-                        />
-                      </Link>
-
-                      {/*ELIMINATE FAVOURITE*/}
-
-                      <div
-                        onClick={() =>
-                          actions.removeFav(
-                            fav.type,
-                            fav.favObject.result.properties.name
-                          )
-                        }
-                        className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
-                      >
-                        <img src={Trash} className="trash" />
-                      </div>
-
-                      <p className="text-light text-center">
-                        {fav.favObject.result.properties.name}
-                      </p>
-                    </div>
-                  </div>
+                  <FavsCollection fav={fav} />
                 ))}
               </div>
             </div>

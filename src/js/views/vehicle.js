@@ -1,17 +1,24 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import heart from "../../img/heart.png";
-import back from "../../img/back.png";
 import { Context } from "../store/appContext";
 
 export const Vehicle = () => {
+  // ROUTE PARAMS & NAVIGATE:
+
   const { uid } = useParams();
+
+  const navigate = useNavigate();
+
+  //USETATES:
+
   const [vehiclesData, setVehiclesData] = useState(null);
   const [showFavsMessage, setShowFavsMessage] = useState(null);
 
-  const { store, actions } = useContext(Context);
+  //CONTEXT:
 
-  const navigate = useNavigate();
+  const { actions } = useContext(Context);
+
+  //FUNCTIONS:
 
   const handleBackVehicles = () => {
     actions.handleBackToCollection("vehicles");
@@ -85,14 +92,14 @@ export const Vehicle = () => {
                         : "my-3 flashy-border text-light text-space border-4 outline-none heart-box  d-flex justify-content-center align-items-center"
                     }
                   >
-                    <img
-                      src={heart}
+                    <i
                       className={
                         showFavsMessage === vehiclesData.result.uid
                           ? "d-none"
-                          : "heart"
+                          : "fa-solid fa-heart fa-lg text-center ms-1"
                       }
-                    />
+                      style={{ color: "#fafafa" }}
+                    ></i>
                     {showFavsMessage === vehiclesData.result.uid && (
                       <div className="text-warning text-space">
                         Added to favourites!
@@ -107,8 +114,12 @@ export const Vehicle = () => {
                   className="d-flex align-items-center mt-4 mouse justify-content-lg-start justify-content-center"
                   onClick={handleBackVehicles}
                 >
-                  <img src={back} className="back-arrow mb-3" />
-                  <p className="ms-4 back-text">Back to vehicles</p>
+                  <i
+                    class="fa-solid fa-arrow-left-long fa-sm mb-3"
+                    style={{ color: "#ffffff" }}
+                  ></i>
+
+                  <p className="ms-2 back-text">Back to vehicles</p>
                 </div>
               </div>
             </div>

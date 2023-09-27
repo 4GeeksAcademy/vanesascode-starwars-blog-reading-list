@@ -1,17 +1,24 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-// import heart from "../../img/heart.png";
-import back from "../../img/back.png";
 
 export const Person = () => {
+  // ROUTE PARAMS & NAVIGATE:
+
   const { uid } = useParams();
+
+  const navigate = useNavigate();
+
+  //USETATES:
+
   const [personData, setPersonData] = useState(null);
   const [showFavsMessage, setShowFavsMessage] = useState(null);
 
-  const { store, actions } = useContext(Context);
+  //CONTEXT:
 
-  const navigate = useNavigate();
+  const { actions } = useContext(Context);
+
+  //FUNCTIONS:
 
   const handleback = () => {
     actions.handleBackToCollection("characters");
@@ -42,6 +49,7 @@ export const Person = () => {
 
   return (
     <>
+      {/* <audio ref={audioRef} src={shot} /> */}
       <div className="container py-lg-5 py-0 text-light text-space">
         {personData ? (
           <div>
@@ -83,15 +91,15 @@ export const Person = () => {
                           : "my-3 flashy-border text-light text-space border-4 outline-none heart-box  d-flex justify-content-center align-items-center"
                       }
                     >
-                      <i className="fa-solid fa-heart fa-lg text-center" style={{color: '#fafafa'}}></i>
-                      {/* <img
-                        src={`https://cdn4.iconfinder.com/data/icons/flat-feelings/154/heart-love-url-link-web-page-512.png`}
+                      <i
                         className={
                           showFavsMessage === personData.result.uid
                             ? "d-none"
-                            : "heart"
+                            : "fa-solid fa-heart fa-lg text-center ms-1"
                         }
-                      /> */}
+                        style={{ color: "#fafafa" }}
+                      ></i>
+
                       {showFavsMessage === personData.result.uid && (
                         <div className="text-warning text-space">
                           Added to favourites!
@@ -106,8 +114,11 @@ export const Person = () => {
                     className="d-flex align-items-center justify-content-center mt-4 mouse justify-content-lg-start justify-content-center"
                     onClick={handleback}
                   >
-                    <img src={back} className="back-arrow mb-3" />
-                    <p className="ms-4 back-text">Back to characters</p>
+                    <i
+                      class="fa-solid fa-arrow-left-long fa-sm mb-3"
+                      style={{ color: "#ffffff" }}
+                    ></i>
+                    <p className="ms-2 back-text">Back to characters</p>
                   </div>
                 </div>
               </div>
