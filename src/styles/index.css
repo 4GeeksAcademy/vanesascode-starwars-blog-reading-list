@@ -7,7 +7,7 @@
 body {
   font-family: "Montserrat", sans-serif;
   background-color: black;
-  /* cursor: url("../img/ColorLightSaber.cur"), pointer; */
+  cursor: url("../img/ColorLightSaber.cur"), pointer;
 }
 
 .text-space {

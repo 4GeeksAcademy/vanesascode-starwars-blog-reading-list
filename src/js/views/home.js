@@ -9,11 +9,6 @@ import VehicleCollection from "../component/VehicleCollection";
 import PlanetCollection from "../component/PlanetCollection";
 import FavsCollection from "../component/FavsCollection";
 
-//AUDIO:
-
-// import ReactAudioPlayer from "react-audio-player";
-// import shot from "./shot.mp3";
-
 export const Home = () => {
   //CONTEXT
 
