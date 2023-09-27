@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import heart from "/../heart.png";
+// import heart from "/../heart.png";
 import back from "../../img/back.png";
 
 export const Person = () => {
@@ -84,7 +84,7 @@ export const Person = () => {
                       }
                     >
                       <img
-                        src={heart}
+                        src={`https://w7.pngwing.com/pngs/433/468/png-transparent-white-heart-shape-illustration-heart-outline-wedding-hearts-love-angle-white-thumbnail.png`}
                         className={
                           showFavsMessage === personData.result.uid
                             ? "d-none"
