@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import heart from "//heart.png";
+import heart from "/heart.png";
 import back from "../../img/back.png";
 
 export const Person = () => {
