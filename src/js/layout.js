@@ -1,4 +1,5 @@
 import React from "react";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
@@ -12,7 +13,7 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
-import Particles from "./component/particles";
+// import Particles from "./component/particles";
 
 //create your first component
 const Layout = () => {
@@ -39,7 +40,7 @@ const Layout = () => {
           <Footer />
         </ScrollToTop>
       </BrowserRouter>
-      <Particles id="tsparticles" />
+      {/* <Particles id="tsparticles" /> */}
     </div>
   );
 };

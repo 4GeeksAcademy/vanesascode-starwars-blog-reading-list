@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-// import heart from "/../heart.png";
+// import heart from "../../img/heart.png";
 import back from "../../img/back.png";
 
 export const Person = () => {
@@ -83,14 +83,15 @@ export const Person = () => {
                           : "my-3 flashy-border text-light text-space border-4 outline-none heart-box  d-flex justify-content-center align-items-center"
                       }
                     >
-                      <img
-                        src={`https://w7.pngwing.com/pngs/433/468/png-transparent-white-heart-shape-illustration-heart-outline-wedding-hearts-love-angle-white-thumbnail.png`}
+                      <i className="fa-solid fa-heart fa-lg text-center" style={{color: '#fafafa'}}></i>
+                      {/* <img
+                        src={`https://cdn4.iconfinder.com/data/icons/flat-feelings/154/heart-love-url-link-web-page-512.png`}
                         className={
                           showFavsMessage === personData.result.uid
                             ? "d-none"
                             : "heart"
                         }
-                      />
+                      /> */}
                       {showFavsMessage === personData.result.uid && (
                         <div className="text-warning text-space">
                           Added to favourites!
