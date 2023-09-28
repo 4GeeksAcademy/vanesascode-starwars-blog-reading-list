@@ -13,6 +13,7 @@ export const Vehicle = () => {
 
   const [vehiclesData, setVehiclesData] = useState(null);
   const [showFavsMessage, setShowFavsMessage] = useState(null);
+  const [disableButton, setDisableButton] = useState(false);
 
   //CONTEXT:
 
@@ -26,9 +27,18 @@ export const Vehicle = () => {
   };
 
   const handleFavsButton = (key, collection) => {
+    if (disableButton) {
+      return;
+    }
+    setDisableButton(true);
+
     actions.addToFavs(key, collection);
     setShowFavsMessage(key);
     setTimeout(() => setShowFavsMessage(null), 2000);
+
+    setTimeout(() => {
+      setDisableButton(false);
+    }, 10000);
   };
 
   useEffect(() => {
@@ -83,6 +93,7 @@ export const Vehicle = () => {
 
                 <div className="d-flex justify-content-lg-start justify-content-center">
                   <div
+                    disabled={disableButton}
                     onClick={() =>
                       handleFavsButton(vehiclesData.result.uid, "vehicles")
                     }

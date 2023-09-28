@@ -12,10 +12,15 @@ const PersonCollection = ({ person }) => {
   //USESTATE:
 
   const [showFavsMessage, setShowFavsMessage] = useState(null);
+  const [disableButton, setDisableButton] = useState(false);
 
   //FUNCTIONS:
 
   const handleFavsButton = (key, collection) => {
+    if (disableButton) {
+      return;
+    }
+    setDisableButton(true);
     console.log(key);
 
     actions.handleFavsCollection(collection);
@@ -23,6 +28,10 @@ const PersonCollection = ({ person }) => {
 
     setShowFavsMessage(key);
     setTimeout(() => setShowFavsMessage(null), 2000);
+
+    setTimeout(() => {
+      setDisableButton(false);
+    }, 10000);
   };
 
   return (
@@ -44,8 +53,7 @@ const PersonCollection = ({ person }) => {
 
         <div
           onClick={() => handleFavsButton(person.uid, "people")}
-          // onClick={() => actions.addToFavs(person.uid, "people")}
-          // className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
+          disabled={disableButton}
           className={
             showFavsMessage === person.uid
               ? "my-3 bg-black  d-flex justify-content-center align-items-center text-center cursor-pointer"

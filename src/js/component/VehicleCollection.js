@@ -11,10 +11,15 @@ const VehicleCollection = ({ vehicle }) => {
   //USESTATE:
 
   const [showFavsMessage, setShowFavsMessage] = useState(null);
+  const [disableButton, setDisableButton] = useState(false);
 
   //FUNCTIONS:
 
   const handleFavsButton = (key, collection) => {
+    if (disableButton) {
+      return;
+    }
+    setDisableButton(true);
     console.log(key);
 
     actions.handleFavsCollection(collection);
@@ -22,6 +27,10 @@ const VehicleCollection = ({ vehicle }) => {
 
     setShowFavsMessage(key);
     setTimeout(() => setShowFavsMessage(null), 2000);
+
+    setTimeout(() => {
+      setDisableButton(false);
+    }, 10000);
   };
 
   return (

@@ -12,10 +12,15 @@ const PlanetCollection = ({ planet }) => {
   //USESTATE:
 
   const [showFavsMessage, setShowFavsMessage] = useState(null);
+  const [disableButton, setDisableButton] = useState(false);
 
   //FUNCTIONS:
 
   const handleFavsButton = (key, collection) => {
+    if (disableButton) {
+      return;
+    }
+    setDisableButton(true);
     console.log(key);
 
     actions.handleFavsCollection(collection);
@@ -23,6 +28,10 @@ const PlanetCollection = ({ planet }) => {
 
     setShowFavsMessage(key);
     setTimeout(() => setShowFavsMessage(null), 2000);
+
+    setTimeout(() => {
+      setDisableButton(false);
+    }, 10000);
   };
 
   return (
@@ -43,10 +52,8 @@ const PlanetCollection = ({ planet }) => {
         {/*FAVS BUTTON*/}
 
         <div
+          disabled={disableButton}
           onClick={() => handleFavsButton(planet.uid, "planets")}
-          // onClick={() => actions.addToFavs(planet.uid, "planets")}
-
-          // className=" mb-3 flashy-border text-light text-space border-4 outline-none heart-box mt-3 d-flex justify-content-center align-items-center"
           className={
             showFavsMessage === planet.uid
               ? "my-3 bg-black  d-flex justify-content-center align-items-center text-center cursor-pointer"
